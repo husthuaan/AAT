@@ -15,6 +15,7 @@ from .OldModel import ShowAttendTellModel, AllImgModel
 from .AttModel import *
 from .TransformerModel import TransformerModel
 from .AoAModel import AoAModel
+from .AATModel import AATModel
 
 def setup(opt):
     if opt.caption_model == 'fc':
@@ -53,7 +54,10 @@ def setup(opt):
         model = TransformerModel(opt)
     # AoANet
     elif opt.caption_model == 'aoa':
-        model = AoAModel(opt)
+        model = AoAModel(opt)    
+    # AAT    
+    elif opt.caption_model == 'aat':
+        model = AATModel(opt)
     else:
         raise Exception("Caption model not supported: {}".format(opt.caption_model))
 

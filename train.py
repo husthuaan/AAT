@@ -185,6 +185,15 @@ def train(opt):
                 print("iter {} (epoch {}), avg_reward = {:.3f}, time/batch = {:.3f}" \
                     .format(iteration, epoch, model_out['reward'].mean(), end - start))
 
+            if opt.caption_model == 'aat':
+                attention_steps = np.array(model_out['att_step']).transpose()
+                avg_att_time = model_out['avg_att_time']
+                loss_ = model_out['loss_'].mean().item()
+                aat_loss = model_out['aat_loss'].mean().item()
+                print("AAT: loss_ = {:.3f}, att_loss = {:.3f}, avg_att_time = {:.3f}" \
+                    .format(loss_, aat_loss, avg_att_time))
+                print(attention_steps[0])
+
             # Update the iteration and epoch
             iteration += 1
             if data['bounds']['wrapped']:
@@ -202,6 +211,11 @@ def train(opt):
                 add_summary_value(tb_summary_writer, 'scheduled_sampling_prob', model.ss_prob, iteration)
                 if sc_flag:
                     add_summary_value(tb_summary_writer, 'avg_reward', model_out['reward'].mean(), iteration)
+
+                if opt.caption_model == 'aat':
+                    add_summary_value(tb_summary_writer, 'loss_', loss_, iteration)
+                    add_summary_value(tb_summary_writer, 'aat_loss', aat_loss, iteration)
+                    add_summary_value(tb_summary_writer, 'avg_att_time', avg_att_time, iteration)
 
                 loss_history[iteration] = train_loss if not sc_flag else model_out['reward'].mean()
                 lr_history[iteration] = opt.current_lr

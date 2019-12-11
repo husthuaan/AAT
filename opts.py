@@ -25,7 +25,7 @@ def parse_opt():
 
     # Model settings
     parser.add_argument('--caption_model', type=str, default="show_tell",
-                    help='show_tell, show_attend_tell, all_img, fc, att2in, att2in2, att2all2, adaatt, adaattmo, topdown, stackatt, denseatt, transformer')
+                    help='show_tell, show_attend_tell, all_img, fc, att2in, att2in2, att2all2, adaatt, adaattmo, topdown, stackatt, denseatt, transformer, aoa, aat')
     parser.add_argument('--rnn_size', type=int, default=512,
                     help='size of the rnn in number of hidden nodes in each layer')
     parser.add_argument('--num_layers', type=int, default=1,
@@ -46,6 +46,15 @@ def parse_opt():
 
     parser.add_argument('--use_bn', type=int, default=0,
                     help='If 1, then do batch_normalization first in att_embed, if 2 then do bn both in the beginning and the end of att_embed')
+
+    
+    # AAT settings
+    parser.add_argument('--max_att_steps', type=int, default=4,
+                    help='maximun attention steps at each decoding step')
+    parser.add_argument('--epsilon', type=float, default=1e-4,
+                    help='threshold')
+    parser.add_argument('--aat_lambda', type=float, default=1e-4,
+                    help='penalty factor on attention steps')
 
     # AoA settings
     parser.add_argument('--mean_feats', type=int, default=1,
