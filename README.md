@@ -7,14 +7,14 @@ This repository includes the implementation for [Adaptively Aligned Image Captio
 - Python 3.6
 - Java 1.8.0
 - PyTorch 1.0
-- cider
-- coco-caption
+- [cider](https://github.com/ruotianluo/cider)
+- [coco-caption](https://github.com/ruotianluo/coco-caption)
 - tensorboardX
 
 
-## Training AoANet
+## Training AAT
 
-### Prepare data (python 2)
+### Prepare data (with python2)
 
 See details in `data/README.md`.
 
@@ -28,7 +28,7 @@ $ python scripts/prepro_ngrams.py --input_json data/dataset_coco.json --dict_jso
 ### Training
 
 ```bash
-$ CUDA_VISIBLE_DEVICES=0 sh train-aat.sh
+$ sh train-aat.sh
 ```
 
 See `opts.py` for the options.
