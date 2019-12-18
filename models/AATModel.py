@@ -72,8 +72,6 @@ class AATCore(nn.Module):
             
             h_lang += p * h_att
             c_lang += p * state[1][1]
-            if self.not_last == 1:
-                self.att_cost += ((1+(1-p)) * selector.float()).squeeze(1)
 
             h_lang_, c_lang_ = (state[0][1], state[1][1])
 
